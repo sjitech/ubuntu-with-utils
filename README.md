@@ -11,7 +11,9 @@ It is based on ubuntu with some daily tools
 - lsof
 - tree
 - pstree
-- netstat ping arp ...
+- netstat
+- ping arp ...
+- iptables
 - nc
 - curl
 - wget
