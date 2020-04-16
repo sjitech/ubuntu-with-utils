@@ -22,7 +22,6 @@ RUN set -x && apt-get update && \
         git tig \
         binutils acl pv \
         strace tcpdump \
-        ldap-utils \
     && \
     #
     # enable bash-completeion for root user (other users works by default)
