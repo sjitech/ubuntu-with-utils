@@ -1,23 +1,34 @@
 FROM ubuntu:bionic
 
 RUN set -x && apt-get update && \
+    #
+    # remove this file otherwise man pages of later installed tools will not be istalled
+    #rm -f /etc/dpkg/dpkg.cfg.d/excludes && \
+    #apt-get -y install manpages-dev manpages-posix && \
+    # install all things of a normal ubuntu server.
+    (echo y; echo y; echo y; echo y) | unminimize && \
+    #
     # install *.UTF-8 locales otherwise some apps get trouble
     apt-get -y install locales && locale-gen en_US.UTF-8 ja_JP.UTF-8 zh_CN.UTF-8 && update-locale LANG=en_US.UTF-8 && \
+    #
     # install other utilities
     apt-get -y install \
         apt-transport-https \
-        bash-completion vim less man jq \
-        lsof tree psmisc \
-        iproute2 net-tools iputils-ping iptables dnsutils \
-        netcat curl wget nmap socat \
+        bash-completion vim less man jq bc \
+        lsof tree psmisc htop lshw sysstat dstat \
+        iproute2 iputils-ping iptables dnsutils traceroute \
+        netcat curl wget nmap socat netcat-openbsd rsync \
         p7zip-full \
-        git && \
+        git tig \
+        binutils acl pv \
+        strace tcpdump \
+        ldap-utils \
     #
     # enable bash-completeion for root user (other users works by default)
     (echo && echo '[ -f /etc/bash_completion ] && ! shopt -oq posix && . /etc/bash_completion') >> ~/.bashrc && \
     #
     # install sudo and create a sudoable user 'devuser'
-    apt-get -y install sudo && \
+    && apt-get -y install sudo && \
         adduser --disabled-password --gecos "Developer" devuser && \
         adduser devuser sudo && \
         echo "devuser ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers && \
