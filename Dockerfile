@@ -1,6 +1,9 @@
 FROM ubuntu:bionic
 
-RUN apt-get update && \
+RUN set -x && apt-get update && \
+    # install *.UTF-8 locales otherwise some apps get trouble
+    apt-get -y install locales && locale-gen en_US.UTF-8 ja_JP.UTF-8 zh_CN.UTF-8 && update-locale LANG=en_US.UTF-8 && \
+    # install other utilities
     apt-get -y install \
         apt-transport-https \
         bash-completion vim less man jq \
@@ -26,3 +29,6 @@ RUN apt-get update && \
 USER devuser
 
 WORKDIR /home/devuser
+
+# set LANG=*.UTF-8 so that default file encoding will be UTF-8, otherwise any non-ASCII files may have trouble.
+ENV LANG=en_US.UTF-8
