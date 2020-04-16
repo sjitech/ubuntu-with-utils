@@ -23,12 +23,13 @@ RUN set -x && apt-get update && \
         binutils acl pv \
         strace tcpdump \
         ldap-utils \
+    && \
     #
     # enable bash-completeion for root user (other users works by default)
     (echo && echo '[ -f /etc/bash_completion ] && ! shopt -oq posix && . /etc/bash_completion') >> ~/.bashrc && \
     #
     # install sudo and create a sudoable user 'devuser'
-    && apt-get -y install sudo && \
+    apt-get -y install sudo && \
         adduser --disabled-password --gecos "Developer" devuser && \
         adduser devuser sudo && \
         echo "devuser ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers && \
