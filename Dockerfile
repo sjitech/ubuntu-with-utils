@@ -8,7 +8,7 @@ RUN set -x && apt-get update && \
         apt-transport-https \
         bash-completion vim less man jq \
         lsof tree psmisc \
-        net-tools iputils-ping iptables dnsutils \
+        iproute2 net-tools iputils-ping iptables dnsutils \
         netcat curl wget nmap socat \
         p7zip-full \
         git && \
