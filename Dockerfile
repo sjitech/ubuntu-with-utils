@@ -3,10 +3,8 @@ FROM ubuntu:xenial
 RUN set -x && apt-get update && \
     #
     # remove this file otherwise man pages of later installed tools will not be istalled
-    #rm -f /etc/dpkg/dpkg.cfg.d/excludes && \
-    #apt-get -y install manpages-dev manpages-posix && \
-    # install all things of a normal ubuntu server.
-    (echo y; echo y; echo y; echo y) | unminimize && \
+    rm -f /etc/dpkg/dpkg.cfg.d/excludes && \
+    apt-get -y install manpages-dev manpages-posix && \
     #
     # install *.UTF-8 locales otherwise some apps get trouble
     apt-get -y install locales && locale-gen en_US.UTF-8 ja_JP.UTF-8 zh_CN.UTF-8 && update-locale LANG=en_US.UTF-8 && \
