@@ -42,4 +42,4 @@ USER devuser
 WORKDIR /home/devuser
 
 # set LANG=*.UTF-8 so that default file encoding will be UTF-8, otherwise any non-ASCII files may have trouble.
-ENV LANG=en_US.UTF-8
+ENV LANG=C.UTF-8
